@@ -2,3 +2,6 @@
 /.idea
 # IPython
 /.ipynb_checkpoints
+
+/data
+/tasks
