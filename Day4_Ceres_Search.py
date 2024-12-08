@@ -71,10 +71,10 @@ def part2(matrix: np.ndarray) -> int:
 
 if __name__ == "__main__":
 
-    text = open(INPUT_DATA_PATH, "r").read()
+    text = open(INPUT_DATA_PATH, "r").read().strip()
 
     matrix = []
-    for line in text.strip().split("\n"):
+    for line in text.split("\n"):
         matrix.append(list(line))
     matrix = np.array(matrix)
 
