@@ -4,7 +4,7 @@ from typing import Literal
 import numpy as np
 
 
-INPUT_DATA_PATH = os.path.join("data", "day6.txt")
+INPUT_DATA_PATH = os.path.join("data", "test6.txt")
 
 
 class Guard:
@@ -50,7 +50,13 @@ class Guard:
         self.x, self.y = self.forward()
 
 
-def part1(init_map) -> int:
+def pp(m):
+    for i in m:
+        print(" ".join(i))
+    print()
+
+
+def main(init_map) -> int:
 
     out_min_x, out_min_y = -1, -1
     out_max_x, out_max_y = init_map.shape
@@ -83,7 +89,49 @@ def part1(init_map) -> int:
 
     part1_result = (wayout_map == "X").sum()
 
-    return part1_result
+
+    # имеет смысл пробовать ставить препятствия на исходном пути охранника
+    wayout_map[init_x, init_y] = "^"
+    part2_result = 0
+    for x, y in zip(*np.where(wayout_map == "X")):
+        print(x, y)
+        loop_map = init_map.copy()
+        loop_map[x, y] = "#"
+
+        guard = Guard("north", init_x, init_y)
+
+        inside_map = True
+        inside_loop = False
+        while inside_map and not inside_loop:
+
+            # вычисляем координаты клетки перед охранником
+            forward_x, forward_y = guard.forward()
+
+            # обработка случая, когда следующая клетка вне карты
+            if forward_x in [out_min_x, out_max_x] or forward_y in [out_min_y, out_max_y]:
+                inside_map = False
+
+            # обработка встречи препятствия
+            elif loop_map[forward_x, forward_y] == "#":
+                guard.rotate()
+
+            else:
+                current_value = loop_map[guard.x, guard.y]
+                if isinstance(current_value, np.str_):
+                    loop_map[guard.x, guard.y] = 1
+                elif isinstance(current_value, int):
+                    if current_value == 4:
+                        inside_loop = True
+                    else:
+                        loop_map[guard.x, guard.y] = current_value + 1
+                guard.step()
+
+            # pp(loop_map)
+
+        if inside_loop:
+            part2_result += 1
+
+    return part1_result, part2_result
 
 
 if __name__ == "__main__":
@@ -95,6 +143,7 @@ if __name__ == "__main__":
         init_map.append(list(line))
     init_map = np.array(init_map)
 
-    part1_result = part1(init_map)
+    part1_result, part2_result = main(init_map)
 
     print(part1_result)
+    print(part2_result)
