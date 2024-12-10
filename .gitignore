@@ -2,3 +2,5 @@
 /.idea
 # IPython
 /.ipynb_checkpoints
+# bytecode
+__pycache__/
