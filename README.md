@@ -8,3 +8,4 @@
 ⭐ [Day 6: Guard Gallivant](https://adventofcode.com/2024/day/6)  
 ⭐⭐ [Day 7: Bridge Repair](https://adventofcode.com/2024/day/7)  
 ⭐⭐ [Day 8: Resonant Collinearity](https://adventofcode.com/2024/day/8)  
+⭐  [Day 9: Disk Fragmenter](https://adventofcode.com/2024/day/9)  
