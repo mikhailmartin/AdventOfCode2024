@@ -55,6 +55,59 @@ def part1(disk_map: str) -> int:
     return checksum
 
 
+def part2(disk_map: str) -> int:
+
+    free_spaces = []
+    pointer_l = 0
+    id_num_l, is_file_l, block_size_l = read(pointer_l, disk_map)
+    pointer_r = len(disk_map) - 1
+    id_num_r, is_file_r, block_size_r = read(pointer_r, disk_map)
+    checksum = 0
+    index = 0
+    while pointer_r != pointer_l:
+
+        # если справа файл, то пытаемся ему найти место слева
+        if is_file_r:
+            # ищем место в кусках
+            if free_spaces:
+                for block_size, start_index in free_spaces:
+                    if block_size
+            # если слева файл, то просто считаем по нему контрольную сумму
+            if is_file_l:
+                for _ in range(block_size_l):
+                    checksum += index * id_num_l
+                    index += 1
+                pointer_l += 1
+                id_num_l, is_file_l, block_size_l = read(pointer_l, disk_map)
+            # если слева свободное пространство,
+            else:
+                # если можем в него засунуть файл справа,
+                if block_size_l >= block_size_r:
+                    # то засовываем
+                    while block_size_r > 0:
+                        checksum += index * id_num_r
+                        index += 1
+                        block_size_l -= 1
+                        block_size_r -= 1
+                    # если закончилось свободное пространство слева
+                    if block_size_l == 0:
+                        pointer_l += 1
+                        id_num_l, is_file_l, block_size_l = read(pointer_l, disk_map)
+                    # если остался свободный кусок пространства слева
+                    elif block_size_l > 0:
+                        free_spaces.append((block_size_l, index))
+
+                    pointer_r -= 1
+                    id_num_r, is_file_r, block_size_r = read(pointer_r, disk_map)
+
+        # если справа пустое пространство, то пропускаем его
+        else:
+            pointer_r -= 1
+            id_num_r, is_file_r, block_size_r = read(pointer_r, disk_map)
+
+    return checksum
+
+
 def read(pointer: int, disk_map: str) -> tuple[int, bool, int]:
 
     id_num, is_free_space = divmod(pointer, 2)
