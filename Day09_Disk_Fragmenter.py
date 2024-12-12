@@ -1,7 +1,7 @@
 import os
 
 
-INPUT_DATA_PATH = os.path.join("data", "day9.txt")
+INPUT_DATA_PATH = os.path.join("data", "day09.txt")
 
 
 def part1(disk_map: str) -> int:

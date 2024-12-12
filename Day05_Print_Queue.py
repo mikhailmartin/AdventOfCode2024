@@ -1,6 +1,6 @@
 import os
 
-INPUT_DATA_PATH = os.path.join("data", "day5.txt")
+INPUT_DATA_PATH = os.path.join("data", "day05.txt")
 
 
 def main(rules: list[str], pages) -> tuple[int, int]:

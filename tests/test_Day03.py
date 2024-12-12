@@ -5,7 +5,7 @@ sys.path.append(parent_dir)
 
 import pytest
 from pytest import param
-from Day3_Mull_It_Over import main
+from Day03_Mull_It_Over import main
 
 
 PART1_PATTERN = r"mul\(\d{1,3},\d{1,3}\)"

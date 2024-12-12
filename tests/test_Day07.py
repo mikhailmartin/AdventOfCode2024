@@ -5,7 +5,7 @@ sys.path.append(parent_dir)
 
 import pytest
 from pytest import param
-from Day7_Bridge_Repair import apply_operation, evaluate_expression
+from Day07_Bridge_Repair import apply_operation, evaluate_expression
 
 
 @pytest.mark.parametrize(

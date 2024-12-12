@@ -4,7 +4,7 @@ import os
 import numpy as np
 
 
-INPUT_DATA_PATH = os.path.join("data", "day8.txt")
+INPUT_DATA_PATH = os.path.join("data", "day08.txt")
 
 
 def part1(matrix) -> int:

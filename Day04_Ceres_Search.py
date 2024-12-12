@@ -3,7 +3,7 @@ import os
 import numpy as np
 
 
-INPUT_DATA_PATH = os.path.join("data", "day4.txt")
+INPUT_DATA_PATH = os.path.join("data", "day04.txt")
 
 
 def part1(matrix: np.ndarray) -> int:

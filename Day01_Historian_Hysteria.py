@@ -1,7 +1,7 @@
 import os
 import numpy as np
 
-INPUT_DATA_PATH = os.path.join("data", "day1.txt")
+INPUT_DATA_PATH = os.path.join("data", "day01.txt")
 
 
 def part1(left_list: np.ndarray, right_list: np.ndarray) -> np.int64:

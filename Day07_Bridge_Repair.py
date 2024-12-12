@@ -4,7 +4,7 @@ import os
 from typing import Literal
 
 
-INPUT_DATA_PATH = os.path.join("data", "day7.txt")
+INPUT_DATA_PATH = os.path.join("data", "day07.txt")
 
 
 def main(equations: list[tuple[int, list[int]]]) -> tuple[int, int]:

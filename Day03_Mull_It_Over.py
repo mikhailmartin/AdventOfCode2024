@@ -1,7 +1,7 @@
 import re
 import os
 
-INPUT_DATA_PATH = os.path.join("data", "day3.txt")
+INPUT_DATA_PATH = os.path.join("data", "day03.txt")
 
 
 def main(pattern: str, text: str) -> int:

@@ -4,7 +4,7 @@ from typing import Literal
 import numpy as np
 
 
-INPUT_DATA_PATH = os.path.join("data", "test6.txt")
+INPUT_DATA_PATH = os.path.join("data", "test06.txt")
 
 
 class Guard:

@@ -1,6 +1,6 @@
 import os
 
-INPUT_DATA_PATH = os.path.join("data", "day2.txt")
+INPUT_DATA_PATH = os.path.join("data", "day02.txt")
 
 
 def part1(report: list[int]) -> bool:

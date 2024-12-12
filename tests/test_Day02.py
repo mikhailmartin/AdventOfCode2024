@@ -5,7 +5,7 @@ sys.path.append(parent_dir)
 
 import pytest
 from pytest import param
-from Day2_RedNosed_Reports import part1
+from Day02_RedNosed_Reports import part1
 
 
 @pytest.mark.parametrize(
