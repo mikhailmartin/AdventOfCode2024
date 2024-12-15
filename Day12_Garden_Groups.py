@@ -11,6 +11,7 @@ def part1(garden_map: np.ndarray) -> int:
     busy = np.full_like(garden_map, fill_value=False, dtype=bool)
     max_rows, max_cols = garden_map.shape
 
+    # TODO: переписать на flood-fill алгоритм
     def depth_first_search(x: int, y: int, plant_type_region: str) -> tuple[int, int]:
 
         is_inside_garden = 0 <= x < max_rows and 0 <= y < max_cols
