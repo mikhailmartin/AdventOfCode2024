@@ -4,7 +4,7 @@ from typing import Literal
 import numpy as np
 
 
-INPUT_DATA_PATH = os.path.join("data", "test06.txt")
+INPUT_DATA_PATH = os.path.join("data", "day06.txt")
 
 
 class Guard:
@@ -56,7 +56,7 @@ def pp(m):
     print()
 
 
-def main(init_map) -> int:
+def main(init_map) -> tuple[int, int]:
 
     out_min_x, out_min_y = -1, -1
     out_max_x, out_max_y = init_map.shape
@@ -67,9 +67,9 @@ def main(init_map) -> int:
 
     wayout_map = init_map.copy()
 
-    # пока не вышли за пределы карты
+    path = []
     inside_map = True
-    while inside_map:
+    while inside_map:  # пока не вышли за пределы карты
 
         # вычисляем координаты клетки перед охранником
         forward_x, forward_y = guard.forward()
@@ -77,6 +77,7 @@ def main(init_map) -> int:
         # обработка случая, когда следующая клетка вне карты
         if forward_x in [out_min_x, out_max_x] or forward_y in [out_min_y, out_max_y]:
             wayout_map[guard.x, guard.y] = "X"
+            path.append((guard.x, guard.y))
             inside_map = False
 
         # обработка встречи препятствия
@@ -85,19 +86,27 @@ def main(init_map) -> int:
 
         else:
             wayout_map[guard.x, guard.y] = "X"
+            path.append((guard.x, guard.y))
             guard.step()
 
     part1_result = (wayout_map == "X").sum()
 
 
     # имеет смысл пробовать ставить препятствия на исходном пути охранника
-    wayout_map[init_x, init_y] = "^"
     part2_result = 0
-    for x, y in zip(*np.where(wayout_map == "X")):
-        print(x, y)
-        loop_map = init_map.copy()
-        loop_map[x, y] = "#"
+    init_x, init_y = path[0]
+    for i in range(1, len(path)):
 
+        new_obstruction_x, new_obstruction_y = path[i]
+
+        if (init_x, init_y) == (new_obstruction_x, new_obstruction_y):
+            continue
+
+        loop_map = init_map.copy()
+        counter_map = np.full_like(init_map, fill_value=0, dtype=np.int64)
+        # ставим новое препятствие на пути охранника
+        loop_map[new_obstruction_x, new_obstruction_y] = "#"
+        # и самого охранника перед ним
         guard = Guard("north", init_x, init_y)
 
         inside_map = True
@@ -116,17 +125,11 @@ def main(init_map) -> int:
                 guard.rotate()
 
             else:
-                current_value = loop_map[guard.x, guard.y]
-                if isinstance(current_value, np.str_):
-                    loop_map[guard.x, guard.y] = 1
-                elif isinstance(current_value, int):
-                    if current_value == 4:
-                        inside_loop = True
-                    else:
-                        loop_map[guard.x, guard.y] = current_value + 1
+                if counter_map[guard.x, guard.y] == 4:
+                    inside_loop = True
+                else:
+                    counter_map[guard.x, guard.y] += 1
                 guard.step()
-
-            # pp(loop_map)
 
         if inside_loop:
             part2_result += 1
