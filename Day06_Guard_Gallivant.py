@@ -95,9 +95,8 @@ def main(init_map) -> tuple[int, int]:
     # имеет смысл пробовать ставить препятствия на исходном пути охранника
     part2_result = 0
     init_x, init_y = path[0]
-    for i in range(1, len(path)):
-
-        new_obstruction_x, new_obstruction_y = path[i]
+    path = set(path[1:])  # дедублицируем места на пути
+    for new_obstruction_x, new_obstruction_y in path:
 
         if (init_x, init_y) == (new_obstruction_x, new_obstruction_y):
             continue
@@ -149,4 +148,4 @@ if __name__ == "__main__":
     part1_result, part2_result = main(init_map)
 
     print(part1_result)
-    print(part2_result)
+    print(part2_result)  # не 1723
