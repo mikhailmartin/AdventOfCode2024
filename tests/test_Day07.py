@@ -13,7 +13,7 @@ from Day07_Bridge_Repair import apply_operation, evaluate_expression
     [
         param("+", 1, 2, 3),
         param("*", 4, 5, 20),
-        param("||", 45, 56, 4556)
+        param("||", 45, 56, 4556),
     ],
 )
 def test_apply_operation(operator, a, b, expected):
