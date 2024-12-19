@@ -71,7 +71,7 @@ def part2(disk_map: str) -> int:
     l = len(free_spaces)
     checksum = 0
     for i, (position_r, block_size_r, id_number_r) in enumerate(reversed(files)):
-        for j, (position_l, block_size_l) in enumerate(free_spaces[:l-1-i]):
+        for j, (position_l, block_size_l) in enumerate(free_spaces[:l-i]):
             # если свободное пространство может вместить файл,
             if block_size_l >= block_size_r:
                 # вмещаем файл
