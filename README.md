@@ -15,7 +15,7 @@
 | ⭐      | [Day 11: Plutonian Pebbles](https://adventofcode.com/2024/day/11)      |                    |
 | ⭐      | [Day 12: Garden Groups](https://adventofcode.com/2024/day/12)          | flood fill         |
 | ⭐⭐     | [Day 13: Claw Contraption](https://adventofcode.com/2024/day/13)       | Kramer method      |
-|        | [Day 14: Restroom Redoubt](https://adventofcode.com/2024/day/14)       |                    |
+| ⭐      | [Day 14: Restroom Redoubt](https://adventofcode.com/2024/day/14)       |                    |
 |        | [Day 15: Warehouse Woes](https://adventofcode.com/2024/day/15)         |                    |
 |        | [Day 16: Reindeer Maze](https://adventofcode.com/2024/day/16)          |                    |
 |        | [Day 17: Chronospatial Computer](https://adventofcode.com/2024/day/17) |                    |
