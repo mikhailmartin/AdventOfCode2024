@@ -29,6 +29,23 @@ def part1(robots: list[tuple[int, int, int, int]]) -> int:
     return part1_result
 
 
+def part2(robots: list[tuple[int, int, int, int]]) -> None:
+    """
+    Нашёл закономерность, что на картинках появляются вертикальные полосы каждые
+    103 картинки и горизонтальные полосы - каждые 101 картинку. Посчитал, когда
+    должны появится горизонтальная и вертикальная полоса.
+    """
+    from matplotlib import pyplot as plt
+
+    n_steps = 0
+    while n_steps <= 100_000:
+        n_steps += 1
+        matrix = get_matrix_after_n_steps(robots, n_steps, MAP_SIZE_X, MAP_SIZE_Y)
+        plt.imshow(matrix, cmap="gray")
+        plt.axis("off")
+        plt.savefig(f"images/{n_steps}.png", bbox_inches="tight")
+
+
 def get_matrix_after_n_steps(
     robots: list[tuple[int, int, int, int]],
     n_steps: int,
