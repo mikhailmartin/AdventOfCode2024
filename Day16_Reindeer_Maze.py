@@ -16,6 +16,29 @@ def wayback(x: int, y: int) -> tuple[int, int]:
 
 def part1(reindeer_maze: np.ndarray) -> int:
 
+    finish_routes = get_finish_routes(reindeer_maze)
+
+    result = min(score for _, score in finish_routes)
+
+    return result
+
+
+def part2(reindeer_maze: np.ndarray) -> int:
+
+    finish_routes = get_finish_routes(reindeer_maze)
+
+    min_score = min(score for _, score in finish_routes)
+    best_routes = [route for route, score in finish_routes if score == min_score]
+    tiles = {tile for route in best_routes for tile in route}
+    result = len(tiles)
+
+    return result
+
+
+def get_finish_routes(
+    reindeer_maze: np.ndarray
+) -> list[tuple[list[tuple[int, int]], int]]:
+
     # достаём координаты старта и финиша
     x_start, y_start = np.where(reindeer_maze == "S")
     start = (x_start[0], y_start[0])
@@ -63,7 +86,7 @@ def part1(reindeer_maze: np.ndarray) -> int:
                 else:
                     queue.append(((nx, ny), dir_, score+1000+1, route+[(nx, ny)]))
 
-    return min(score for _, score in finish_routes)
+    return finish_routes
 
 
 if __name__ == "__main__":
@@ -72,4 +95,7 @@ if __name__ == "__main__":
     reindeer_maze = parse_data(text)
 
     part1_result = part1(reindeer_maze)
+    part2_result = part2(reindeer_maze)
+
     print(part1_result)
+    print(part2_result)
