@@ -29,17 +29,17 @@ class Processor:
         self.register_b = register_b
         self.register_c = register_c
 
-    def run(self, program: list[int]) -> str:
+    def run(self, program: list[int]) -> list[int]:
 
         instructions = [
-            self.adv,
-            self.bxl,
-            self.bst,
-            self.jnz,
-            self.bxc,
-            self.out,
-            self.bdv,
-            self.cdv,
+            self.adv,  # 0
+            self.bxl,  # 1
+            self.bst,  # 2
+            self.jnz,  # 3
+            self.bxc,  # 4
+            self.out,  # 5
+            self.bdv,  # 6
+            self.cdv,  # 7
         ]
 
         outputs = []
@@ -50,9 +50,9 @@ class Processor:
 
             result = instruction(operand)
             if result is not None:
-                outputs.append(str(result))
+                outputs.append(result)
 
-        return ",".join(outputs)
+        return outputs
 
     def adv(self, operand: int) -> None:
         self.register_a //= 2 ** self.combo_operand(operand)
@@ -109,9 +109,51 @@ def part1(text: str) -> str:
 
     processor = Processor(register_a, register_b, register_c)
 
-    part1_result = processor.run(program)
+    outputs = processor.run(program)
+    part1_result = ",".join(map(str, outputs))
 
     return part1_result
+
+
+def part2(text: str) -> int:
+    """
+    Здесь не разобраться без анализа программы.
+
+    Program: 2,4,1,3,7,5,0,3,1,5,4,4,5,5,3,0
+
+    B <- A % 8
+    B <- B ^ 3
+    C <- A // (2 ** B)
+    A <- A // 8
+    B <- B ^ 5
+    B <- B ^ C
+    out <- B % 8
+    if A != 0:
+        jump start
+    else:
+        stop
+    """
+    _, register_b, register_c, program = parse_data(text)
+    # depth-first search алгоритм
+    register_a = 0
+    index = -1
+    stack = [(register_a, index)]
+    len_program = len(program)
+
+    while stack:
+        register_a, index = stack.pop()
+
+        if -index > len_program:
+            break
+
+        for three_bits in reversed(range(8)):
+            register_a_new = register_a * 8 + three_bits
+            processor = Processor(register_a_new, register_b, register_c)
+            outputs = processor.run(program)
+            if outputs[index] == program[index]:
+                stack.append((register_a_new, index-1))
+
+    return register_a
 
 
 if __name__ == "__main__":
@@ -119,5 +161,7 @@ if __name__ == "__main__":
     text = open(INPUT_DATA_PATH, "r").read().strip()
 
     part1_result = part1(text)
+    part2_result = part2(text)
 
     print(part1_result)
+    print(part2_result)
