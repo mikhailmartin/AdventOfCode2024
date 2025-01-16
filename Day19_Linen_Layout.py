@@ -1,3 +1,4 @@
+from functools import lru_cache
 import os
 
 
@@ -13,10 +14,10 @@ def parse_data(text: str) -> tuple[list[str], list[str]]:
     return available_towels, designs
 
 
-def part1(text: str):
+def part1(text: str) -> int:
 
     available_towels, designs = parse_data(text)
-    available_towels = sorted(available_towels, key=len)
+    available_towels = tuple(sorted(available_towels, key=len))
 
     part1_result = 0
     for design in designs:
@@ -26,7 +27,9 @@ def part1(text: str):
     return part1_result
 
 
-def is_possible(design: str, available_towels: list[str], pointer: int = 0) -> bool:
+def is_possible(
+    design: str, available_towels: tuple[str, ...], pointer: int = 0
+) -> bool:
 
     if pointer == len(design):
         return True
@@ -40,10 +43,42 @@ def is_possible(design: str, available_towels: list[str], pointer: int = 0) -> b
     return False
 
 
+def part2(text: str):
+
+    available_towels, designs = parse_data(text)
+    available_towels = sorted(available_towels, key=len)
+    available_towels = tuple(available_towels)
+
+    part2_result = 0
+    for design in designs:
+        part2_result += count_possible(design, available_towels)
+
+    return part2_result
+
+
+@lru_cache(maxsize=None)
+def count_possible(
+    design: str, available_towels: tuple[str, ...], pointer: int = 0
+) -> int:
+
+    if pointer == len(design):
+        return 1
+
+    counter = 0
+    for towel in available_towels:
+        next_pointer = pointer + len(towel)
+        if next_pointer <= len(design) and design[pointer:next_pointer] == towel:
+            counter += count_possible(design, available_towels, next_pointer)
+
+    return counter
+
+
 if __name__ == "__main__":
 
     text = open(INPUT_DATA_PATH, "r").read().strip()
 
     part1_result = part1(text)
+    part2_result = part2(text)
 
     print(part1_result)
+    print(part2_result)

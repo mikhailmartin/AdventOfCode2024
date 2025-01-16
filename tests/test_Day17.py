@@ -17,14 +17,14 @@ def test_Processor_example1():
 def test_Processor_example2():
 
     processor = Processor(10, 0, 0)
-    assert processor.run([5, 0, 5, 1, 5, 4]) == "0,1,2"
+    assert processor.run([5, 0, 5, 1, 5, 4]) == [0, 1, 2]
 
 
 def test_Processor_example3():
 
     processor = Processor(2024, 0, 0)
     result = processor.run([0, 1, 5, 4, 3, 0])
-    assert (result, processor.register_a) == ("4,2,5,6,7,7,7,7,3,1,0", 0)
+    assert (result, processor.register_a) == ([4, 2, 5, 6, 7, 7, 7, 7, 3, 1, 0], 0)
 
 
 def test_Processor_example4():
@@ -44,4 +44,4 @@ def test_Processor_example5():
 def test_Processor_example6():
 
     processor = Processor(729, 0, 0)
-    assert processor.run([0, 1, 5, 4, 3, 0]) == "4,6,3,5,6,3,5,2,1,0"
+    assert processor.run([0, 1, 5, 4, 3, 0]) == [4, 6, 3, 5, 6, 3, 5, 2, 1, 0]
