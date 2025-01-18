@@ -16,7 +16,7 @@ def parse_data(text: str) -> np.ndarray:
     return np.array([list(line) for line in text.split("\n")], dtype="object")
 
 
-def part1(text):
+def part(text: str, size: int) -> int:
 
     racetrack_map = parse_data(text)
 
@@ -26,7 +26,7 @@ def part1(text):
 
     best_cheats_counter = 0
     for x, y in racetrack:
-        for nx, ny, s in foo(x, y, max_rows, max_cols, size=2):
+        for nx, ny, s in foo(x, y, max_rows, max_cols, size=size):
             if (
                 isinstance(colored_racetrack_map[nx, ny], int)
                 and colored_racetrack_map[nx, ny] - colored_racetrack_map[x, y] - s >= 100
@@ -82,6 +82,8 @@ if __name__ == "__main__":
 
     text = open(INPUT_DATA_PATH, "r").read().strip()
 
-    part1_result = part1(text)
+    part1_result = part(text, 2)
+    part2_result = part(text, 20)
 
     print(part1_result)
+    print(part2_result)
