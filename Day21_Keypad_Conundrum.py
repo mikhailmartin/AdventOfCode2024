@@ -39,6 +39,18 @@ class Solution:
 
         return complexities
 
+    def part2(self, door_codes: list[str]):
+
+        self.paths_numeric_keypad = self.get_paths(self.numeric_keypad)
+        self.paths_directional_keypad = self.get_paths(self.directional_keypad)
+
+        complexities = 0
+        for door_code in door_codes:
+            complexity = int(door_code[:-1]) * self.get_min_length(door_code, 25)
+            complexities += complexity
+
+        return complexities
+
     @staticmethod
     def get_paths(keypad: list[str]) -> defaultdict[tuple[str, str], list[str]]:
 
@@ -116,5 +128,7 @@ if __name__ == "__main__":
 
     solution = Solution()
     part1_result = solution.part1(door_codes)
+    part2_result = solution.part2(door_codes)
 
     print(part1_result)
+    print(part2_result)
