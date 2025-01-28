@@ -21,6 +21,6 @@ from Day19_Linen_Layout import count_possible
         param("bbrgwb", ("r", "wr", "b", "g", "bwu", "rb", "gb", "br"), 0),
     ],
 )
-def test_foo(design, available_towels, expected):
+def test_count_possible(design, available_towels, expected):
 
     assert count_possible(design, available_towels) == expected
