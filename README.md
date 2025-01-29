@@ -23,7 +23,7 @@
 | ⭐⭐     | [Day 19: Linen Layout](https://adventofcode.com/2024/day/19)           |                      |
 | ⭐⭐     | [Day 20: Race Condition](https://adventofcode.com/2024/day/20)         |                      |
 | ⭐⭐     | [Day 21: Keypad Conundrum](https://adventofcode.com/2024/day/21)       |                      |
-|        | [Day 22: Monkey Market](https://adventofcode.com/2024/day/22)          |                      |
+| ⭐      | [Day 22: Monkey Market](https://adventofcode.com/2024/day/22)          |                      |
 |        | [Day 23: LAN Party](https://adventofcode.com/2024/day/23)              |                      |
 |        | [Day 24: Crossed Wires](https://adventofcode.com/2024/day/24)          |                      |
 |        | [Day 25: Code Chronicle](https://adventofcode.com/2024/day/25)         |                      |
