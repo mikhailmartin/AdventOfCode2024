@@ -61,6 +61,8 @@ def part2(text: str):
     c_out_bits = dict()
     for bit_index in range(45):
 
+        print(f"bit {bit_index:02}")
+
         # 1-bit half adder
         if bit_index == 0:
             x_bit = "x00"
@@ -74,7 +76,7 @@ def part2(text: str):
                 backward[z_bit], backward[xor1] = backward[xor1], backward[z_bit]
 
             and1 = forward[(frozenset((x_bit, y_bit)), "AND")]
-            c_out_bits[0] = and1
+            c_out_bits[bit_index] = and1
 
         # 1-bit full adder
         else:
@@ -84,21 +86,33 @@ def part2(text: str):
             c_in_bit = c_out_bits[bit_index-1]
 
             xor1 = forward[(frozenset((x_bit, y_bit)), "XOR")]
-            ...
-
             and1 = forward[(frozenset((x_bit, y_bit)), "AND")]
 
-            xor2 = forward[(frozenset((xor1, c_in_bit)), "XOR")]
-            if xor2 != z_bit:
-                swapped.extend([z_bit, xor2])
+            # проверка XOR_1
+            inputs, gate = backward[z_bit]
+            if gate != "XOR":
+                anti_z_bit = forward[(frozenset((xor1, c_in_bit)), "XOR")]
+                swapped.extend([z_bit, anti_z_bit])
+                print(f"{swapped=}")
+                # swap
+                forward[backward[z_bit]], forward[backward[anti_z_bit]] = forward[backward[anti_z_bit]], forward[backward[z_bit]]
+                backward[z_bit], backward[anti_z_bit] = backward[anti_z_bit], backward[z_bit]
+            elif xor1 not in inputs:
+                if c_in_bit not in inputs:
+                    print("пока хз, что делать")
+                else:
+                    anti_xor1, = inputs - {c_in_bit}
+                    swapped.extend([xor1, anti_xor1])
+                    print(f"{swapped=}")
+                    # swap
+                    forward[backward[xor1]], forward[backward[anti_xor1]] = forward[backward[anti_xor1]], forward[backward[xor1]]
+                    backward[xor1], backward[anti_xor1] = backward[anti_xor1], backward[xor1]
+                    xor1 = anti_xor1
 
-            and2 = forward.get((frozenset((xor1, c_in_bit)), "AND"), "not found")
-            if and2 == "not found":
-                ...  # TODO
+            and2 = forward[(frozenset((xor1, c_in_bit)), "AND")]
+            or3 = forward[(frozenset((and1, and2)), "OR")]
 
-            or3 = forward.get((frozenset((and1, and2)), "OR"), "not found")
-            if or3 == "not found":
-                ...  # TODO
+            c_out_bits[bit_index] = or3
 
     return
 
