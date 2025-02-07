@@ -5,6 +5,10 @@ import os
 INPUT_DATA_PATH = os.path.join("data", "day11.txt")
 
 
+def parse_data(text: str) -> list[int]:
+    return list(map(int, text.split(" ")))
+
+
 @lru_cache(maxsize=None)
 def part1(stone: int, n_blinks: int) -> int:
 
@@ -41,10 +45,17 @@ def split(stone: int) -> list[int]:
 
 if __name__ == "__main__":
 
-    stones = map(int, open(INPUT_DATA_PATH, "r").read().strip().split(" "))
+    text = open(INPUT_DATA_PATH, "r").read().strip()
+
+    stones = parse_data(text)
 
     part1_result = 0
     for stone in stones:
         part1_result += part1(stone, 25)
 
+    part2_result = 0
+    for stone in stones:
+        part2_result += part1(stone, 75)
+
     print(part1_result)
+    print(part2_result)

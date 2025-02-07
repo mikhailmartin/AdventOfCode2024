@@ -12,7 +12,7 @@
 | ⭐⭐     | [Day 8: Resonant Collinearity](https://adventofcode.com/2024/day/8)    |                      |
 | ⭐⭐     | [Day 9: Disk Fragmenter](https://adventofcode.com/2024/day/9)          | two pointers         |
 | ⭐⭐     | [Day 10: Hoof It](https://adventofcode.com/2024/day/10)                | depth-first search   |
-| ⭐      | [Day 11: Plutonian Pebbles](https://adventofcode.com/2024/day/11)      |                      |
+| ⭐⭐     | [Day 11: Plutonian Pebbles](https://adventofcode.com/2024/day/11)      |                      |
 | ⭐      | [Day 12: Garden Groups](https://adventofcode.com/2024/day/12)          | flood fill           |
 | ⭐⭐     | [Day 13: Claw Contraption](https://adventofcode.com/2024/day/13)       | Kramer method        |
 | ⭐⭐     | [Day 14: Restroom Redoubt](https://adventofcode.com/2024/day/14)       |                      |
