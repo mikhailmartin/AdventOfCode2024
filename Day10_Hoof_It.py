@@ -6,7 +6,20 @@ import numpy as np
 INPUT_DATA_PATH = os.path.join("data", "day10.txt")
 
 
-def part1(topographic_map: np.ndarray) -> int:
+def parse_data(text: str) -> np.ndarray:
+
+    topographic_map = []
+    for line in text.split("\n"):
+        line = [int(digit) for digit in line]
+        topographic_map.append(line)
+    topographic_map = np.array(topographic_map)
+
+    return topographic_map
+
+
+def part1(text: str) -> int:
+
+    topographic_map = parse_data(text)
 
     max_rows, max_cols = topographic_map.shape
 
@@ -50,12 +63,6 @@ if __name__ == "__main__":
 
     text = open(INPUT_DATA_PATH, "r").read().strip()
 
-    topographic_map = []
-    for line in text.split("\n"):
-        line = [int(digit) for digit in line]
-        topographic_map.append(line)
-    topographic_map = np.array(topographic_map)
-
-    part1_result = part1(topographic_map)
+    part1_result = part1(text)
 
     print(part1_result)
