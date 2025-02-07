@@ -59,10 +59,51 @@ def score(x: int, y: int, topographic_map: np.ndarray) -> int:
     return reachable_nines
 
 
+def part2(text: str) -> int:
+
+    topographic_map = parse_data(text)
+
+    max_rows, max_cols = topographic_map.shape
+
+    total_rating = 0
+    for x, y in product(range(max_rows), range(max_cols)):
+        if topographic_map[x, y] == 0:
+            total_rating += rating(x, y, topographic_map)
+
+    return total_rating
+
+
+def rating(x: int, y: int, topographic_map: np.ndarray) -> int:
+
+    max_rows, max_cols = topographic_map.shape
+    stack = [(x, y)]
+    reachable_nines = 0
+
+    while stack:
+        cx, cy = stack.pop(0)
+
+        current_height = topographic_map[cx, cy]
+
+        if current_height == 9:
+            reachable_nines += 1
+        else:
+            for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+                nx, ny = cx + dx, cy + dy
+                if (
+                    0 <= nx < max_rows and 0 <= ny < max_cols
+                    and (topographic_map[nx, ny] == current_height + 1)
+                ):
+                    stack.append((nx, ny))
+
+    return reachable_nines
+
+
 if __name__ == "__main__":
 
     text = open(INPUT_DATA_PATH, "r").read().strip()
 
     part1_result = part1(text)
+    part2_result = part2(text)
 
     print(part1_result)
+    print(part2_result)
