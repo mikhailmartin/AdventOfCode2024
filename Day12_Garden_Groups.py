@@ -6,7 +6,19 @@ import numpy as np
 INPUT_DATA_PATH = os.path.join("data", "day12.txt")
 
 
-def part1(garden_map: np.ndarray) -> int:
+def parse_data(text: str) -> np.ndarray:
+
+    garden_map = []
+    for line in text.split("\n"):
+        garden_map.append(list(line))
+    garden_map = np.array(garden_map)
+
+    return garden_map
+
+
+def part1(text: str) -> int:
+
+    garden_map = parse_data(text)
 
     busy = np.full_like(garden_map, fill_value=False, dtype=bool)
     max_rows, max_cols = garden_map.shape
@@ -48,11 +60,6 @@ if __name__ == "__main__":
 
     text = open(INPUT_DATA_PATH, "r").read().strip()
 
-    garden_map = []
-    for line in text.split("\n"):
-        garden_map.append(list(line))
-    garden_map = np.array(garden_map)
-
-    part1_result = part1(garden_map)
+    part1_result = part1(text)
 
     print(part1_result)
